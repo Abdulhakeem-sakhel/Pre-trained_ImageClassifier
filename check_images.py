@@ -36,6 +36,7 @@ from classify_images import classify_images
 from adjust_results4_isadog import adjust_results4_isadog
 from calculates_results_stats import calculates_results_stats
 from print_results import print_results
+from classifier import models
 
 # Main program function defined below
 def main():
@@ -74,7 +75,7 @@ def main():
     #             classify_images(in_arg.dir, results, in_arg.arch)
     # Creates Classifier Labels with classifier function, Compares Labels, 
     # and adds these results to the results dictionary - results
-    classify_images(None, results, None)
+    classify_images(f'./{in_arg.dir}/', results, models.get(in_arg.arch))
 
     # Function that checks Results Dictionary using results    
     check_classifying_images(results)    
