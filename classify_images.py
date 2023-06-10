@@ -65,4 +65,21 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    for filename in results_dic.keys():
+        test_image = f'./{images_dir}/{filename}'
+        image_classification = classifier(test_image, model).lower().strip()
+        diff = get_diffrence(results_dic.get(filename)[0], image_classification)
+
+        results_dic.get(filename).append(image_classification)
+        results_dic.get(filename).append(diff)
+
+    None
+
+def get_diffrence(image_labels: str, classifier_labels: str) -> int:
+    diff = 0
+
+    for image_label in image_labels.split(' '):
+        if image_label in  classifier_labels:
+            diff = 1
+    
+    return diff

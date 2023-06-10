@@ -36,7 +36,6 @@ from classify_images import classify_images
 from adjust_results4_isadog import adjust_results4_isadog
 from calculates_results_stats import calculates_results_stats
 from print_results import print_results
-from classifier import models
 
 # Main program function defined below
 def main():
@@ -75,7 +74,7 @@ def main():
     #             classify_images(in_arg.dir, results, in_arg.arch)
     # Creates Classifier Labels with classifier function, Compares Labels, 
     # and adds these results to the results dictionary - results
-    classify_images(f'./{in_arg.dir}/', results, models.get(in_arg.arch))
+    classify_images(f'./{in_arg.dir}/', results, in_arg.arch)
 
     # Function that checks Results Dictionary using results    
     check_classifying_images(results)    
@@ -117,7 +116,6 @@ def main():
     print_results(results, results_stats, None, True, True)
     
     # TODO 0: Measure total program runtime by collecting end time
-    sleep(5)
     end_time = time()
     
     # TODO 0: Computes overall runtime in seconds & prints it in hh:mm:ss format
