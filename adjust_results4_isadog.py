@@ -66,5 +66,28 @@ def adjust_results4_isadog(results_dic, dogfile):
                maltese) (string - indicates text file's filename)
     Returns:
            None - results_dic is mutable data type so no return needed.
-    """           
-    None
+    """
+    dog_names = set()
+    with open(dogfile) as f:
+        for dog_name in f:
+            if dog_name not in dog_names:
+                dog_names.add(dog_name.rsplit('\n')[0].lower())
+            else:
+                print(f"Warning found duplicate dog name ({dog_name}) in the file: {dogfile}")
+
+
+    for filename in results_dic.keys():
+        pet_image_label = results_dic.get(filename)[0]
+        classifier_image_label = results_dic.get(filename)[1]
+
+        if pet_image_label in dog_names:
+            results_dic.get(filename).append(1)
+        else:
+            results_dic.get(filename).append(0)
+
+        if classifier_image_label in dog_names:
+            results_dic.get(filename).append(1)
+        else:
+            results_dic.get(filename).append(0)
+
+    return results_dic
