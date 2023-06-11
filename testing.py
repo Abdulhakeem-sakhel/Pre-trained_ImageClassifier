@@ -1,1 +1,0 @@
-dog_name = "Beagle_01141.jpg"
