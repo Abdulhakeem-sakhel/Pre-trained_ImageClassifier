@@ -72,6 +72,7 @@ def print_results(results_dic, results_stats_dic, model,
     print(f'Percentage of Correct Dogs = {results_stats_dic["pct_correct_dogs"]}%')
     print(f'Percentage of Correct Breed = {results_stats_dic["pct_correct_breed"]}%')
     print(f'Percentage of Correct "Not-a" Dog = {results_stats_dic["pct_correct_notdogs"]}%\n')
+    print(f'Percentage of matched  labels  = {results_stats_dic["pct_matched_lables"]}%\n')
 
     if print_incorrect_dogs is True:
         print("the filenames that were incorrectly classified as dogs are:")

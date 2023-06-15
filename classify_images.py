@@ -73,13 +73,8 @@ def classify_images(images_dir, results_dic, model):
         results_dic.get(filename).append(image_classification)
         results_dic.get(filename).append(diff)
 
-    None
 
 def get_diffrence(image_labels: str, classifier_labels: str) -> int:
-    diff = 0
-
-    for image_label in image_labels.split(' '):
-        if image_label in  classifier_labels:
-            diff = 1
-    
-    return diff
+    if image_labels in classifier_labels:
+        return 1
+    return 0

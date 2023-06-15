@@ -72,16 +72,18 @@ def calculates_results_stats(results_dic: dict):
     # this function 
     result_stats_dic = dict()
     
-    n_images = len(results_dic)
+    n_images = len(results_dic)#Z
     n_correct_dogs = 0 #A: Both labels are of dogs: results_dic[key][3] = 1 and results_dic[key][4] = 1
     n_dogs_img = 0 #B: Pet Label is a dog: results_dic[key][3] = 1
     n_correct_nondogs = 0#C: Both labels are NOT of dogs: results_dic[key][3] = 0 and results_dic[key][4] = 0
     n_notdogs_img = 0 #D: number images - number dog images
     n_correct_breed = 0#E: Pet Label is a dog & Labels match: results_dic[key][3] = 1 and results_dic[key][2] = 1
+    n_matched_lables = 0#Y results_dic[key][2] = 1
 
     pct_correct_dogs = 0.0# A/B * 100
     pct_correct_notdogs = 0.0# C/d * 100
     pct_correct_breed = 0.0# E/B * 100
+    pct_matched_labels = 0.0# Y/Z * 100
 
     for result in results_dic.values():
         if result[3] == 1 and result[4] == 1:# A
@@ -92,12 +94,14 @@ def calculates_results_stats(results_dic: dict):
             n_correct_nondogs += 1
         if result[2] == 1 and result[3] == 1:# E
             n_correct_breed += 1
+        if result[2] == 1:
+            n_matched_lables += 1
     n_notdogs_img = n_images - n_dogs_img # C
 
     pct_correct_dogs = n_correct_dogs / n_dogs_img * 100.0
     pct_correct_notdogs = n_correct_nondogs / n_notdogs_img * 100.0
     pct_correct_breed = n_correct_breed / n_dogs_img * 100.0
-
+    pct_matched_labels = n_matched_lables / n_images * 100.0
 
     result_stats_dic['n_images'] = n_images
     result_stats_dic['n_correct_dogs'] = n_correct_dogs
@@ -109,4 +113,5 @@ def calculates_results_stats(results_dic: dict):
     result_stats_dic['pct_correct_dogs'] = pct_correct_dogs
     result_stats_dic['pct_correct_notdogs'] = pct_correct_notdogs
     result_stats_dic['pct_correct_breed'] = pct_correct_breed
+    result_stats_dic['pct_matched_lables'] = pct_matched_labels
     return result_stats_dic
