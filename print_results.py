@@ -62,5 +62,28 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    None
-                
+    print(f'\nthe model we used for Classifier is ({model})')
+    print(f'The images we classified have the following info:')
+    print(f'Number of images = {results_stats_dic["n_images"]}')
+    print(f'Number of Dog images = {results_stats_dic["n_dogs_img"]}')
+    print(f'Number of "Not-a" Dog images = {results_stats_dic["n_notdogs_img"]}\n')
+
+    print('The Results we got:')
+    print(f'Percentage of Correct Dogs = {results_stats_dic["pct_correct_dogs"]}%')
+    print(f'Percentage of Correct Breed = {results_stats_dic["pct_correct_breed"]}%')
+    print(f'Percentage of Correct "Not-a" Dog = {results_stats_dic["pct_correct_notdogs"]}%\n')
+
+    if print_incorrect_dogs is True:
+        print("the filenames that were incorrectly classified as dogs are:")
+        for filename in results_dic.keys():
+            if sum(results_dic[filename][3:]) == 1:
+                print(f'the image file: {filename}')
+                print(f'\tthe pet image labels: {results_dic[filename][0]}')
+                print(f'\tthe classifier labels: {results_dic[filename][1]}')
+    if print_incorrect_breed is True:
+        print("the filenames that were incorrectly classified with diffrent dog breeds are:")
+        for filename in results_dic.keys():
+            if sum(results_dic[filename][3:]) == 2 and results_dic[filename][2] == 0:
+                print(f'the image file: {filename}')
+                print(f'\tthe pet image labels: {results_dic[filename][0]}')
+                print(f'the classifier labels: {results_dic[filename][1]}')
