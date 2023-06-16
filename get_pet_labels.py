@@ -44,6 +44,9 @@ def get_pet_labels(image_dir):
     filename_list = listdir(image_dir)
     results_dic = dict()
     for filename in filename_list:
+        if filename.startswith('.'): #exclude hidden file 
+            continue
+
         if results_dic.get(filename) is None:
             filename_labels = get_filename_labels(filename)
             results_dic[filename] = filename_labels
@@ -54,7 +57,7 @@ def get_pet_labels(image_dir):
     return results_dic
 
 def get_filename_labels(filename: str)-> list:
-    labels_list = [label for label in filename.lower().strip().split('_') if label.isalpha()]
+    labels_list = [label for label in filename.lower().strip().split('.')[0].split('_') if label.isalpha()]
     label = ' '.join(labels_list)
     result_list = list()
     result_list.append(label)

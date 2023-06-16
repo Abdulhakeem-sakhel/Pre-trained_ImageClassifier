@@ -70,9 +70,7 @@ def classify_images(images_dir, results_dic, model):
         image_classification = classifier(test_image, model).lower().strip()
         diff = get_diffrence(results_dic.get(filename)[0], image_classification)
 
-        results_dic.get(filename).append(image_classification)
-        results_dic.get(filename).append(diff)
-
+        results_dic.get(filename).extend((image_classification, diff))
 
 def get_diffrence(image_labels: str, classifier_labels: str) -> int:
     if image_labels in classifier_labels:
